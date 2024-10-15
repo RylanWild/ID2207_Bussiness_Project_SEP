@@ -6,16 +6,36 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const email = document.getElementById('email').value;
         
-        if (email === 'customerservice@sep.com') {
-            window.location.href = 'customerservice.html';
-        } else if (email === 'janet@sep.com') {
-            window.location.href = 'scs.html';
-        } else if (email === 'alice@sep.com') {
-            window.location.href = 'financialmanager.html';
-        } else if (email === 'mike@sep.com') {
-            window.location.href = 'administrationmanager.html';
-        } else {
-            alert('Login functionality not implemented for this email.');
+        switch(email) {
+            case 'sarah@sep.se':
+            case 'sam@sep.se':
+            case 'judy@sep.se':
+            case 'carine@sep.se':
+                window.location.href = 'customerservice.html';
+                break;
+            case 'janet@sep.se':
+                window.location.href = 'scs.html';
+                break;
+            case 'alice@sep.se':
+                window.location.href = 'financialmanager.html';
+                break;
+            case 'mike@sep.se':
+                window.location.href = 'administrationmanager.html';
+                break;
+            case 'jack@sep.se':
+                window.location.href = 'productionmanager.html';
+                break;
+            case 'natalie@sep.se':
+                window.location.href = 'servicemanager.html';
+                break;
+            case 'tobi@sep.se':
+                window.location.href = 'photographysubteam.html';
+                break;
+            case 'lauren@sep.se':
+                window.location.href = 'waitersubteam.html';
+                break;
+            default:
+                alert('Login functionality not implemented for this email.');
         }
     });
 });

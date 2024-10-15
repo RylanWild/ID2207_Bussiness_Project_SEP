@@ -204,31 +204,94 @@ nav button {
 /* Customer Service Page Styles */
 .customerservice-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
     height: 100vh;
     background-color: #f0f0f0;
+    padding-top: 20vh; /* 这会���到页面上方的4/5处 */
 }
 
 .customerservice-title {
     font-size: 2.5em;
     color: #333;
     text-align: center;
+    margin-top: 30px; /* 为按钮留出空间 */
+}
+
+.new-event-btn {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 20px; /* 在按钮和标题之间添加一些间距 */
+}
+
+.new-event-btn:hover {
+    background-color: #45a049;
 }
 
 /* 在文件末尾添加以下样式 */
 .scs-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
-    background-color: #f0f0f0;
 }
 
-.scs-title {
-    font-size: 2.5em;
+.sidebar {
+    width: 25%;
+    background-color: #f3f3f3;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+}
+
+.dropdown {
+    margin-bottom: 10px;
+}
+
+.dropdown-header {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #e0e0e0;
+}
+
+.dropdown-header i {
+    margin-right: 10px;
+}
+
+.dropdown-content {
+    display: none;
+    padding: 10px;
+}
+
+.event-item {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.record-number {
+    font-weight: bold;
+}
+
+.event-type {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.main-content {
+    width: 75%;
+    padding: 20px;
+}
+
+.content-header {
+    font-size: 1.5em;
     color: #333;
-    text-align: center;
 }
 
 /* 在文件末尾添加以下样式 */
@@ -259,4 +322,500 @@ nav button {
     font-size: 2.5em;
     color: #333;
     text-align: center;
+}
+
+/* 在文件末尾添加以下样式 */
+.eventform-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+.eventform-title {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.eventform {
+    width: 100%;
+    max-width: 600px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.submit-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.submit-btn:hover {
+    background-color: #45a049;
+}
+
+/* 在已有的样式后添加或更新以下样式 */
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 5px;
+    width: auto;
+}
+
+.event-form-display {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.event-form-display h3 {
+    margin-top: 0;
+    color: #0078d4;
+}
+
+.event-form-display p {
+    margin-bottom: 10px;
+}
+
+.event-item {
+    cursor: pointer;
+}
+
+.event-item:hover {
+    background-color: #e0e0e0;
+}
+
+/* 在文件末尾添加以下样式 */
+.form-actions {
+    margin-top: 20px;
+}
+
+.approve-btn, .reject-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.approve-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.reject-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.approve-btn:hover {
+    background-color: #45a049;
+}
+
+.reject-btn:hover {
+    background-color: #da190b;
+}
+
+.fm-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* 其他样式与 .scs-container 相同 */
+
+.write-feedback-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #0078d4;
+    color: white;
+}
+
+.write-feedback-btn:hover {
+    background-color: #005a9e;
+}
+
+/* 在文件末尾添加以下样式 */
+.feedback-container {
+    margin-top: 20px;
+}
+
+.feedback-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.submit-feedback-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    margin-top: 10px;
+}
+
+.submit-feedback-btn:hover:not(:disabled) {
+    background-color: #45a049;
+}
+
+.submit-feedback-btn:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+}
+
+.am-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* 其他样式与 .scs-container 相同 */
+
+/* 在文件末尾添加以下样式 */
+.financial-feedback {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.financial-feedback h4 {
+    margin-top: 0;
+    color: #333;
+}
+
+.financial-feedback p {
+    margin-bottom: 0;
+}
+
+.pm-container, .sm-container {
+    display: flex;
+    height: 100vh;
+}
+
+.task-display {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* 其他样式与之前的容器样式相同 */
+
+.pm-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.top-bar {
+    height: 10vh;
+    background-color: #f3f3f3;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.new-btn {
+    padding: 8px 16px;
+    background-color: #0078d4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.new-btn:hover {
+    background-color: #005a9e;
+}
+
+.main-area {
+    display: flex;
+    height: 90vh;
+}
+
+.sidebar {
+    width: 25%;
+    background-color: #f3f3f3;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+}
+
+.main-content {
+    width: 75%;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* 保留之前的其他样式 */
+
+/* 在文件末尾加以下样式 */
+#newClientRequestForm {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+#newClientRequestForm .form-group {
+    margin-bottom: 15px;
+}
+
+#newClientRequestForm label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#newClientRequestForm input[type="text"],
+#newClientRequestForm input[type="date"],
+#newClientRequestForm input[type="number"],
+#newClientRequestForm textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#newClientRequestForm textarea {
+    resize: vertical;
+}
+
+#newClientRequestForm .submit-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#newClientRequestForm .submit-btn:hover {
+    background-color: #45a049;
+}
+
+/* 在文件末尾添加以下样式 */
+#newClientRequestForm .large-input textarea {
+    width: 100%;
+    min-height: 100px;
+    resize: vertical;
+}
+
+#newClientRequestForm .budget-input {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#newClientRequestForm .budget-input label {
+    margin-right: 10px;
+    font-weight: normal;
+}
+
+#newClientRequestForm .budget-input input {
+    width: 150px;
+}
+
+.department-budget-container {
+    margin-bottom: 20px;
+}
+
+.department-budget {
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.department-budget label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.department-budget textarea {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.department-budget .budget-input {
+    display: flex;
+    align-items: center;
+}
+
+.department-budget .budget-input label {
+    margin-right: 10px;
+    font-weight: normal;
+}
+
+.department-budget .budget-input input {
+    width: 150px;
+}
+
+.sm-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* 其他样式与 .pm-container 相同 */
+
+/* 在文件末尾添加以下样式 */
+.photography-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f3f3f3;
+    border-bottom: 1px solid #ddd;
+}
+
+.top-bar h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.main-area {
+    display: flex;
+    flex: 1;
+}
+
+.task-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.task-item:hover {
+    background-color: #f0f0f0;
+}
+
+.action-btn {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.action-btn:hover {
+    background-color: #45a049;
+}
+
+/* 在文件末尾添加以下样式 */
+#detailedPlan {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.action-btn {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.action-btn:hover {
+    background-color: #45a049;
+}
+
+/* 在文件末尾添加以下样式 */
+#amountReasonContainer {
+    margin-top: 10px;
+}
+
+#amountReasonContainer div {
+    margin-bottom: 10px;
+}
+
+#amountReasonContainer label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#amountReasonContainer input[type="number"],
+#amountReasonContainer textarea {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#amountReasonContainer textarea {
+    resize: vertical;
+}
+
+.detailed-plan {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 4px;
+}
+
+.detailed-plan h4 {
+    margin-top: 0;
+    color: #333;
 }
