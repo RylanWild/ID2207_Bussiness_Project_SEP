@@ -1,0 +1,202 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px 0;
+    text-align: right;
+    z-index: 1000;
+}
+
+nav button {
+    margin-right: 20px; /* 增加右边距 */
+    padding: 8px 20px; /* 增加按钮内边距 */
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50; /* 添加背景色 */
+    color: white; /* 文字颜色改为白色 */
+    border: none; /* 移除边框 */
+    border-radius: 4px; /* 添加圆角 */
+}
+
+.welcome-container {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 1001;
+}
+
+.welcome-text {
+    font-weight: bold;
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.welcome-subtext {
+    font-size: 1.2em;
+    color: #666;
+}
+
+.slider-container {
+    width: 100%;
+    height: 60vh;
+    overflow: hidden;
+    position: absolute;
+    top: 62%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slider img {
+    object-fit: cover;
+}
+
+/* 在文件末尾添加或更新以下样式 */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    padding-top: 20vh; /* 这会将内容推到页面上方的4/5处 */
+}
+
+.login-title {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+.login-form label {
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.login-form input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.continue-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.continue-btn:hover {
+    background-color: #45a049;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* 在文件末尾添加以下样式 */
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    padding-top: 20vh;
+}
+
+.signup-title {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    align-items: center;
+}
+
+.input-group {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.signup-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.signup-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.continue-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.continue-btn:hover {
+    background-color: #45a049;
+}
+
+.signin-prompt {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.signin-link {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.signin-link:hover {
+    text-decoration: underline;
+}
