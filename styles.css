@@ -200,3 +200,63 @@ nav button {
 .signin-link:hover {
     text-decoration: underline;
 }
+
+/* Customer Service Page Styles */
+.customerservice-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.customerservice-title {
+    font-size: 2.5em;
+    color: #333;
+    text-align: center;
+}
+
+/* 在文件末尾添加以下样式 */
+.scs-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.scs-title {
+    font-size: 2.5em;
+    color: #333;
+    text-align: center;
+}
+
+/* 在文件末尾添加以下样式 */
+.financialmanager-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.financialmanager-title {
+    font-size: 2.5em;
+    color: #333;
+    text-align: center;
+}
+
+/* 在文件末尾添加以下样式 */
+.administrationmanager-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.administrationmanager-title {
+    font-size: 2.5em;
+    color: #333;
+    text-align: center;
+}
