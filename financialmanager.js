@@ -1,79 +1,73 @@
 document.addEventListener('DOMContentLoaded', function() {
     const dropdowns = document.querySelectorAll('.dropdown-header');
-    const eventItems = document.querySelectorAll('.event-item');
-    const eventFormDisplay = document.getElementById('eventFormDisplay');
+    const formDisplay = document.getElementById('formDisplay');
+    const unreviewedContent = document.querySelector('.dropdown-content');
+    const reviewedContent = document.querySelectorAll('.dropdown-content')[1];
 
-    dropdowns.forEach(dropdown => {
-        dropdown.addEventListener('click', function() {
-            this.classList.toggle('active');
-            const dropdownContent = this.nextElementSibling;
-            if (dropdownContent.style.display === "block") {
-                dropdownContent.style.display = "none";
-                this.querySelector('i').classList.remove('fa-caret-up');
-                this.querySelector('i').classList.add('fa-caret-down');
-            } else {
-                dropdownContent.style.display = "block";
-                this.querySelector('i').classList.remove('fa-caret-down');
-                this.querySelector('i').classList.add('fa-caret-up');
-            }
+    // 模拟数据
+    const forms = {
+        unreviewed: [
+            { id: 'EF001', type: 'Event Form', title: 'Wedding', clientName: 'John & Sarah Smith', eventDate: '2023-09-15', expectedBudget: 25000, numberOfGuests: 150, venue: 'Seaside Resort', cateringRequirements: 'Full course meal, vegetarian options' },
+            { id: 'EF002', type: 'Event Form', title: 'Corporate Meeting', clientName: 'Tech Innovations Inc.', eventDate: '2023-10-20', expectedBudget: 15000, numberOfGuests: 75, venue: 'Downtown Conference Center', cateringRequirements: 'Breakfast and lunch buffet' },
+            { id: 'FR001', type: 'Financial Request', title: 'Budget Increase for Photography', requestingDepartment: 'Production', requestedAmount: 5000, reason: 'Upgrade of camera equipment', projectReference: 'PRJ2023-001', expectedROI: '20% increase in bookings', timeline: 'Immediate' },
+            { id: 'FR002', type: 'Financial Request', title: 'New Equipment Purchase', requestingDepartment: 'Service', requestedAmount: 10000, reason: 'Replacement of outdated catering equipment', projectReference: 'PRJ2023-002', expectedROI: '15% reduction in food preparation time', timeline: 'Within 3 months' }
+        ],
+        reviewed: [
+            { id: 'EF003', type: 'Event Form', title: 'Birthday Party', clientName: 'Emily Johnson', eventDate: '2023-08-05', expectedBudget: 5000, numberOfGuests: 50, venue: 'City Park', cateringRequirements: 'Finger food and birthday cake' },
+            { id: 'FR003', type: 'Financial Request', title: 'Staff Training Budget', requestingDepartment: 'HR', requestedAmount: 7500, reason: 'Customer service improvement program', projectReference: 'PRJ2023-003', expectedROI: '10% increase in customer satisfaction scores', timeline: 'Q4 2023' }
+        ]
+    };
+
+    function displayForms() {
+        unreviewedContent.innerHTML = forms.unreviewed.map(form => `
+            <div class="form-item" data-id="${form.id}">
+                <div class="form-number">${form.type} #${form.id}</div>
+                <div class="form-title">${form.title}</div>
+            </div>
+        `).join('');
+
+        reviewedContent.innerHTML = forms.reviewed.map(form => `
+            <div class="form-item" data-id="${form.id}">
+                <div class="form-number">${form.type} #${form.id}</div>
+                <div class="form-title">${form.title}</div>
+            </div>
+        `).join('');
+
+        // 为每个表单项添加点击事件
+        document.querySelectorAll('.form-item').forEach(item => {
+            item.addEventListener('click', () => displayFormDetails(item.dataset.id));
         });
-    });
+    }
 
-    eventItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const recordNumber = this.getAttribute('data-record');
-            displayEventForm(recordNumber);
-        });
-    });
-
-    function displayEventForm(recordNumber) {
-        const eventForms = {
-            '001': {
-                clientName: 'John & Sarah Smith',
-                eventType: 'Wedding',
-                fromDate: '2023-08-15',
-                toDate: '2023-08-16',
-                expectedNumAttendees: 150,
-                expectedBudget: 25000,
-                preferences: ['Decoration', 'Photos/Videos', 'Meals', 'Drinks'],
-                status: 'Unreviewed'
-            },
-            '002': {
-                clientName: 'Tech Innovations Inc.',
-                eventType: 'Corporate Meeting',
-                fromDate: '2023-09-10',
-                toDate: '2023-09-11',
-                expectedNumAttendees: 75,
-                expectedBudget: 15000,
-                preferences: ['Meals', 'Drinks'],
-                status: 'Unreviewed'
-            },
-            '003': {
-                clientName: 'Emily Johnson',
-                eventType: 'Birthday Party',
-                fromDate: '2023-07-20',
-                toDate: '2023-07-20',
-                expectedNumAttendees: 50,
-                expectedBudget: 5000,
-                preferences: ['Decoration', 'Meals', 'Drinks'],
-                status: 'Reviewed'
-            }
-        };
-
-        const form = eventForms[recordNumber];
+    function displayFormDetails(formId) {
+        const form = [...forms.unreviewed, ...forms.reviewed].find(f => f.id === formId);
         if (form) {
             let formHtml = `
-                <h3>Event Form - Record #${recordNumber}</h3>
-                <p><strong>Client Name:</strong> ${form.clientName}</p>
-                <p><strong>Event Type:</strong> ${form.eventType}</p>
-                <p><strong>From Date:</strong> ${form.fromDate}</p>
-                <p><strong>To Date:</strong> ${form.toDate}</p>
-                <p><strong>Expected Number of Attendees:</strong> ${form.expectedNumAttendees}</p>
-                <p><strong>Expected Budget:</strong> $${form.expectedBudget}</p>
-                <p><strong>Preferences:</strong> ${form.preferences.join(', ')}</p>
+                <h3>${form.type} - ${form.title}</h3>
+                <p><strong>Form ID:</strong> ${form.id}</p>
             `;
 
-            if (form.status === 'Unreviewed') {
+            if (form.type === 'Event Form') {
+                formHtml += `
+                    <p><strong>Client Name:</strong> ${form.clientName || 'N/A'}</p>
+                    <p><strong>Event Date:</strong> ${form.eventDate || 'N/A'}</p>
+                    <p><strong>Expected Budget:</strong> $${form.expectedBudget || 'N/A'}</p>
+                    <p><strong>Number of Guests:</strong> ${form.numberOfGuests || 'N/A'}</p>
+                    <p><strong>Venue:</strong> ${form.venue || 'N/A'}</p>
+                    <p><strong>Catering Requirements:</strong> ${form.cateringRequirements || 'N/A'}</p>
+                `;
+            } else if (form.type === 'Financial Request') {
+                formHtml += `
+                    <p><strong>Requesting Department:</strong> ${form.requestingDepartment || 'N/A'}</p>
+                    <p><strong>Requested Amount:</strong> $${form.requestedAmount || 'N/A'}</p>
+                    <p><strong>Reason:</strong> ${form.reason || 'N/A'}</p>
+                    <p><strong>Project Reference:</strong> ${form.projectReference || 'N/A'}</p>
+                    <p><strong>Expected ROI:</strong> ${form.expectedROI || 'N/A'}</p>
+                    <p><strong>Timeline:</strong> ${form.timeline || 'N/A'}</p>
+                `;
+            }
+
+            if (!forms.reviewed.some(f => f.id === formId)) {
                 formHtml += `
                     <div class="form-actions">
                         <button class="write-feedback-btn">Write Feedback</button>
@@ -85,13 +79,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 `;
             }
 
-            eventFormDisplay.innerHTML = formHtml;
+            formDisplay.innerHTML = formHtml;
 
-            // Add event listener to the button
-            const writeFeedbackBtn = eventFormDisplay.querySelector('.write-feedback-btn');
-            const feedbackContainer = eventFormDisplay.querySelector('.feedback-container');
-            const submitFeedbackBtn = eventFormDisplay.querySelector('.submit-feedback-btn');
-            const feedbackText = eventFormDisplay.querySelector('#feedbackText');
+            // 添加反馈功能
+            const writeFeedbackBtn = formDisplay.querySelector('.write-feedback-btn');
+            const feedbackContainer = formDisplay.querySelector('.feedback-container');
+            const submitFeedbackBtn = formDisplay.querySelector('.submit-feedback-btn');
+            const feedbackText = formDisplay.querySelector('#feedbackText');
 
             if (writeFeedbackBtn && feedbackContainer && submitFeedbackBtn && feedbackText) {
                 writeFeedbackBtn.addEventListener('click', () => {
@@ -104,18 +98,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
                 submitFeedbackBtn.addEventListener('click', () => {
-                    handleSubmitFeedback(recordNumber, feedbackText.value);
+                    handleSubmitFeedback(formId, feedbackText.value);
                 });
             }
         } else {
-            eventFormDisplay.innerHTML = '<p>Event form not found.</p>';
+            formDisplay.innerHTML = '<p>Form not found.</p>';
         }
     }
 
-    function handleSubmitFeedback(recordNumber, feedbackText) {
-        // Here you can implement the logic for submitting feedback
-        console.log(`Feedback for Form ${recordNumber}: ${feedbackText}`);
-        // You might want to send this feedback to a server or update the local data
+    function handleSubmitFeedback(formId, feedbackText) {
+        console.log(`Feedback for Form ${formId}: ${feedbackText}`);
         alert('Feedback submitted successfully!');
+        // 这里可以添加将表单移动到 Reviewed 部分的逻辑
     }
+
+    dropdowns.forEach(dropdown => {
+        dropdown.addEventListener('click', function() {
+            this.classList.toggle('active');
+            const dropdownContent = this.nextElementSibling;
+            dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
+        });
+    });
+
+    // 初始化显示表单
+    displayForms();
 });

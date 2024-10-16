@@ -34,6 +34,10 @@ document.addEventListener('DOMContentLoaded', function() {
             case 'lauren@sep.se':
                 window.location.href = 'waitersubteam.html';
                 break;
+            case 'simon@sep.se':
+            case 'maria@sep.se':
+                window.location.href = 'hr.html';
+                break;
             default:
                 alert('Login functionality not implemented for this email.');
         }

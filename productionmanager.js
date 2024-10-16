@@ -2,6 +2,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const dropdowns = document.querySelectorAll('.dropdown-header');
     const eventItems = document.querySelectorAll('.event-item');
     const eventFormDisplay = document.getElementById('eventFormDisplay');
+    const newBtn = document.querySelector('.new-btn');
+    const dropdownContent = document.querySelector('.top-bar .dropdown-content');
+    const clientRequestFormBtn = document.getElementById('clientRequestForm');
+    const recruitmentRequestFormBtn = document.getElementById('recruitmentRequestForm');
+    const financialRequestFormBtn = document.getElementById('financialRequestForm');
 
     dropdowns.forEach(dropdown => {
         dropdown.addEventListener('click', function() {
@@ -24,6 +29,42 @@ document.addEventListener('DOMContentLoaded', function() {
             const recordNumber = this.getAttribute('data-record');
             displayEventForm(recordNumber);
         });
+    });
+
+    // 处理 "+ New" 按钮的点击事件
+    if (newBtn) {
+        newBtn.addEventListener('click', function(e) {
+            e.stopPropagation(); // 阻止事件冒泡
+            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        });
+    }
+
+    // 点击页面其他地方时隐藏下拉菜单
+    document.addEventListener('click', function() {
+        dropdownContent.style.display = 'none';
+    });
+
+    // 阻止下拉菜单内的点击事件冒泡到document
+    dropdownContent.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+
+    // 处理 "Client Request Form" 的点击事件
+    clientRequestFormBtn.addEventListener('click', function() {
+        displayClientRequestForm();
+        dropdownContent.style.display = 'none';
+    });
+
+    // 处理 "Recruitment Request Form" 的点击事件
+    recruitmentRequestFormBtn.addEventListener('click', function() {
+        displayRecruitmentRequestForm();
+        dropdownContent.style.display = 'none';
+    });
+
+    // 处理 "Financial Request Form" 的点击事件
+    financialRequestFormBtn.addEventListener('click', function() {
+        displayFinancialRequestForm();
+        dropdownContent.style.display = 'none';
     });
 
     function displayEventForm(recordNumber) {
@@ -126,11 +167,77 @@ document.addEventListener('DOMContentLoaded', function() {
         alert(`Form ${recordNumber} has been ${action}ed.`);
     }
 
-    // 处理 "+ New" 按钮的点击事件
-    const newBtn = document.querySelector('.new-btn');
-    if (newBtn) {
-        newBtn.addEventListener('click', function() {
-            displayNewForm();
+    function displayClientRequestForm() {
+        // 这里添加显示客户请求表单的逻辑
+        console.log("Displaying Client Request Form");
+        // 可以调用之前的 displayNewForm() 函数或创建新的函数
+        displayNewForm();
+    }
+
+    function displayRecruitmentRequestForm() {
+        const formHtml = `
+            <h3>Recruitment Request Form</h3>
+            <form id="recruitmentRequestForm" class="recruitment-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="contractType">Contract Type:</label>
+                        <select id="contractType" name="contractType" required>
+                            <option value="">Select Contract Type</option>
+                            <option value="fullTime">Full Time</option>
+                            <option value="partTime">Part Time</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="jobTitle">Job Title:</label>
+                        <input type="text" id="jobTitle" name="jobTitle" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="department">Requesting Department:</label>
+                        <select id="department" name="department" required>
+                            <option value="">Select Department</option>
+                            <option value="Administration">Administration</option>
+                            <option value="Services">Services</option>
+                            <option value="Production">Production</option>
+                            <option value="Financial">Financial</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reportTo">Report To:</label>
+                        <input type="text" id="reportTo" name="reportTo" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="yearsOfExperience">Years of Experience:</label>
+                        <input type="number" id="yearsOfExperience" name="yearsOfExperience" required>
+                    </div>
+                </div>
+                <div class="form-group full-width">
+                    <label for="jobDescription">Job Description:</label>
+                    <textarea id="jobDescription" name="jobDescription" rows="4" required></textarea>
+                </div>
+                <div class="form-group full-width">
+                    <label for="jobRequirements">Job Requirements:</label>
+                    <textarea id="jobRequirements" name="jobRequirements" rows="4" required></textarea>
+                </div>
+                <div class="form-group full-width">
+                    <button type="submit" class="submit-btn">Submit</button>
+                </div>
+            </form>
+        `;
+
+        const eventFormDisplay = document.getElementById('eventFormDisplay');
+        eventFormDisplay.innerHTML = formHtml;
+
+        // 添加表单提交事件监听器
+        const form = document.getElementById('recruitmentRequestForm');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // 这里可以添加表单提交的逻辑
+            console.log('Recruitment Request Form submitted');
+            alert('Recruitment Request Form submitted successfully!');
         });
     }
 
@@ -234,6 +341,50 @@ document.addEventListener('DOMContentLoaded', function() {
             // 这里可以添加表单提交的逻辑
             console.log('Form sent');
             alert('Form sent successfully!');
+        });
+    }
+
+    function displayFinancialRequestForm() {
+        const formHtml = `
+            <h3>Financial Request Form</h3>
+            <form id="financialRequestForm" class="financial-form">
+                <div class="form-group">
+                    <label for="requestingDepartment">Requesting Department:</label>
+                    <select id="requestingDepartment" name="requestingDepartment" required>
+                        <option value="">Select Department</option>
+                        <option value="Administration">Administration</option>
+                        <option value="Services">Services</option>
+                        <option value="Production">Production</option>
+                        <option value="Financial">Financial</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="projectReference">Project Reference:</label>
+                    <input type="text" id="projectReference" name="projectReference" required>
+                </div>
+                <div class="form-group">
+                    <label for="requiredAmount">Required Amount:</label>
+                    <input type="number" id="requiredAmount" name="requiredAmount" required>
+                </div>
+                <div class="form-group">
+                    <label for="reason">Reason:</label>
+                    <textarea id="reason" name="reason" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="submit-btn">Submit Request</button>
+                </div>
+            </form>
+        `;
+
+        eventFormDisplay.innerHTML = formHtml;
+
+        // 添加表单提交事件监听器
+        const form = document.getElementById('financialRequestForm');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // 这里可以添加表单提交的逻辑
+            console.log('Financial Request Form submitted');
+            alert('Financial Request Form submitted successfully!');
         });
     }
 });

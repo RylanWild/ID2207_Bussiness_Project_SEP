@@ -10,7 +10,14 @@
 <body>
     <div class="sm-container">
         <div class="top-bar">
-            <button class="new-btn">+ New</button>
+            <div class="dropdown">
+                <button class="new-btn">+ New</button>
+                <div class="dropdown-content">
+                    <a href="#" id="clientRequestForm">Client Request Form</a>
+                    <a href="#" id="recruitmentRequestForm">Recruitment Request Form</a>
+                    <a href="#" id="financialRequestForm">Financial Request Form</a>
+                </div>
+            </div>
         </div>
         <div class="main-area">
             <div class="sidebar">
@@ -44,7 +51,6 @@
                 </div>
             </div>
             <div class="main-content">
-                <h2 class="content-header">Choose an event form to review</h2>
                 <div id="eventFormDisplay" class="event-form-display"></div>
             </div>
         </div>

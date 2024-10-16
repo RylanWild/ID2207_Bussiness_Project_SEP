@@ -209,7 +209,7 @@ nav button {
     align-items: center;
     height: 100vh;
     background-color: #f0f0f0;
-    padding-top: 20vh; /* 这会���到页面上方的4/5处 */
+    padding-top: 20vh; /* 这会面���的4/5处 */
 }
 
 .customerservice-title {
@@ -269,18 +269,23 @@ nav button {
 }
 
 .event-item {
-    background-color: white;
-    border: 1px solid #ddd;
     padding: 10px;
-    margin-bottom: 5px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.event-item:hover {
+    background-color: #f0f0f0;
 }
 
 .record-number {
     font-weight: bold;
+    font-size: 0.9em;
+    color: #333;
 }
 
 .event-type {
-    font-size: 0.9em;
+    font-size: 0.8em;
     color: #666;
 }
 
@@ -556,12 +561,49 @@ nav button {
 }
 
 .top-bar {
+    position: relative;
     height: 10vh;
     background-color: #f3f3f3;
     display: flex;
     align-items: center;
     padding: 0 20px;
     border-bottom: 1px solid #ddd;
+}
+
+.top-bar .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.top-bar .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1000;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.top-bar .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.top-bar .dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.top-bar .dropdown:hover .dropdown-content {
+    display: block;
 }
 
 .new-btn {
@@ -818,4 +860,247 @@ nav button {
 .detailed-plan h4 {
     margin-top: 0;
     color: #333;
+}
+
+.top-bar .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.top-bar .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.top-bar .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border: none;
+    background-color: #fff;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.top-bar .dropdown-content a:not(:last-child) {
+    border-bottom: 1px solid #eee;
+}
+
+.top-bar .dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.top-bar .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.new-btn {
+    padding: 8px 16px;
+    background-color: #0078d4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.new-btn:hover {
+    background-color: #005a9e;
+}
+
+/* Recruitment Request Form Styles */
+#recruitmentRequestForm {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+#recruitmentRequestForm .form-group {
+    margin-bottom: 15px;
+}
+
+#recruitmentRequestForm label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#recruitmentRequestForm input[type="text"],
+#recruitmentRequestForm input[type="number"],
+#recruitmentRequestForm select,
+#recruitmentRequestForm textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#recruitmentRequestForm textarea {
+    resize: vertical;
+}
+
+#recruitmentRequestForm .submit-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#recruitmentRequestForm .submit-btn:hover {
+    background-color: #45a049;
+}
+
+.recruitment-form .radio-group {
+    display: flex;
+    align-items: center;
+}
+
+.recruitment-form .radio-group input[type="radio"] {
+    margin-right: 5px;
+}
+
+.recruitment-form .radio-group label {
+    margin-right: 15px;
+}
+
+.recruitment-form select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.hr-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* 其他样式与 .pm-container 和 .sm-container 相同 */
+
+.request-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.request-item:hover {
+    background-color: #f0f0f0;
+}
+
+.request-title {
+    font-weight: bold;
+}
+
+.request-department {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.form-actions {
+    margin-top: 20px;
+}
+
+.approve-btn, .reject-btn {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.approve-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.reject-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.financial-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.financial-form .form-group {
+    margin-bottom: 15px;
+}
+
+.financial-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.financial-form input[type="text"],
+.financial-form input[type="number"],
+.financial-form select,
+.financial-form textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.financial-form textarea {
+    resize: vertical;
+}
+
+.financial-form .submit-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.financial-form .submit-btn:hover {
+    background-color: #45a049;
+}
+
+.form-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.form-item:hover {
+    background-color: #f0f0f0;
+}
+
+.form-number {
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.form-title {
+    font-size: 0.8em;
+    color: #666;
 }
