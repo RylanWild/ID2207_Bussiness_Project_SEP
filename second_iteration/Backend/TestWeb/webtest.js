@@ -58,7 +58,7 @@ addEventBtn.addEventListener('click', () => {
 
 // 更新事件阶段
 updateEventBtn.addEventListener('click', () => {
-    const eventId = 3;
+    const eventId = 4;
 
     fetch(`http://127.0.0.1:5000/api/events/${eventId}/update_stage`, {
         method: 'PUT',
@@ -75,7 +75,7 @@ updateEventBtn.addEventListener('click', () => {
 
 // 添加财务审核
 financialReviewBtn.addEventListener('click', () => {
-    const eventId = 4;
+    const eventId = 2;
     const reviewData = {
         review: "xxx",
         date: { year: 2024, month: 1, day: 1 }

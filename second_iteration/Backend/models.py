@@ -57,14 +57,10 @@ class MainInformation(db.Model):
 class FinancialFeedback(db.Model):
     __tablename__ = 'financial_feedback'
     id = db.Column(db.Integer, primary_key=True)  # Review ID
-
     review = db.Column(db.String(255), nullable=False, default="unavailable")  # 反馈内容
-    date_year = db.Column(db.Integer, nullable=False, default=-1)  # 反馈日期 - 年
-    date_month = db.Column(db.Integer, nullable=False, default=-1)  # 反馈日期 - 月
-    date_day = db.Column(db.Integer, nullable=False, default=-1)  # 反馈日期 - 日
 
     def __repr__(self):
-        return f"<FinancialFeedback {self.review} on {self.date_year}-{self.date_month}-{self.date_day}>"
+        return f"<FinancialFeedback {self.review}>"
 
 # 子类 3: Tasks Assignment
 class TasksAssignment(db.Model):

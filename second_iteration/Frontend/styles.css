@@ -209,7 +209,7 @@ nav button {
     align-items: center;
     height: 100vh;
     background-color: #f0f0f0;
-    padding-top: 20vh; /* 这会面的4/5处 */
+    padding-top: 20vh; /* 这会面���的4/5处 */
 }
 
 .customerservice-title {
@@ -432,6 +432,17 @@ nav button {
     margin-top: 20px;
 }
 
+.assignment-done-btn{
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    background-color: #4CAF50;
+    color: white;
+}
+
 .approve-btn, .reject-btn {
     padding: 10px 20px;
     font-size: 16px;
@@ -519,11 +530,117 @@ nav button {
     height: 100vh;
 }
 
+/* 其他样式与 .scs-container 相同 */
+
+/* 在文件末尾添加以下样式 */
+.financial-feedback {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.financial-feedback h4 {
+    margin-top: 0;
+    color: #333;
+}
+
+.financial-feedback p {
+    margin-bottom: 0;
+}
+
+.pm-container, .sm-container {
+    display: flex;
+    height: 100vh;
+}
+
+.task-display {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* 其他样式与之前的容器样式相同 */
+
+.pm-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.top-bar {
+    position: relative;
+    height: 10vh;
+    background-color: #f3f3f3;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.top-bar .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.top-bar .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1000;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.top-bar .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.top-bar .dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.top-bar .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.new-btn {
+    padding: 8px 16px;
+    background-color: #0078d4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.new-btn:hover {
+    background-color: #005a9e;
+}
+
+.main-area {
+    display: flex;
+    height: 90vh;
+}
+
 .sidebar {
     width: 25%;
-    background-color: #f4f4f4;
-    padding: 10px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    background-color: #f3f3f3;
+    padding: 20px;
+    border-right: 1px solid #ddd;
 }
 
 .main-content {
@@ -532,28 +649,469 @@ nav button {
     overflow-y: auto;
 }
 
-.dropdown-header {
-    cursor: pointer;
-    padding: 10px;
-    background-color: #ddd;
+/* 保留之前的其他样式 */
+
+/* 在文件末尾加以下样式 */
+#newClientRequestForm {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+#newClientRequestForm .form-group {
+    margin-bottom: 15px;
+}
+
+#newClientRequestForm label {
+    display: block;
     margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#newClientRequestForm input[type="text"],
+#newClientRequestForm input[type="date"],
+#newClientRequestForm input[type="number"],
+#newClientRequestForm textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#newClientRequestForm textarea {
+    resize: vertical;
+}
+
+#newClientRequestForm .submit-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#newClientRequestForm .submit-btn:hover {
+    background-color: #45a049;
+}
+
+/* 在文件末尾添加以下样式 */
+#newClientRequestForm .large-input textarea {
+    width: 100%;
+    min-height: 100px;
+    resize: vertical;
+}
+
+#newClientRequestForm .budget-input {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#newClientRequestForm .budget-input label {
+    margin-right: 10px;
+    font-weight: normal;
+}
+
+#newClientRequestForm .budget-input input {
+    width: 150px;
+}
+
+.department-budget-container {
+    margin-bottom: 20px;
+}
+
+.department-budget {
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.department-budget label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.department-budget textarea {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.department-budget .budget-input {
     display: flex;
     align-items: center;
 }
 
-.dropdown-content {
-    display: none;
-    padding-left: 20px;
+.department-budget .budget-input label {
+    margin-right: 10px;
+    font-weight: normal;
 }
 
-.event-item {
-    padding: 5px 0;
+.department-budget .budget-input input {
+    width: 150px;
+}
+
+.sm-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* 其他样式与 .pm-container 相同 */
+
+/* 在文件末尾添加以下样式 */
+.photography-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f3f3f3;
+    border-bottom: 1px solid #ddd;
+}
+
+.top-bar h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.main-area {
+    display: flex;
+    flex: 1;
+}
+
+.task-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
     cursor: pointer;
 }
 
-.event-form-display {
+.task-item:hover {
+    background-color: #f0f0f0;
+}
+
+.action-btn {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.action-btn:hover {
+    background-color: #45a049;
+}
+
+/* 在文件末尾添加以下样式 */
+#detailedPlan {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.action-btn {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.action-btn:hover {
+    background-color: #45a049;
+}
+
+/* 在文件末尾添加以下样式 */
+#amountReasonContainer {
+    margin-top: 10px;
+}
+
+#amountReasonContainer div {
+    margin-bottom: 10px;
+}
+
+#amountReasonContainer label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#amountReasonContainer input[type="number"],
+#amountReasonContainer textarea {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#amountReasonContainer textarea {
+    resize: vertical;
+}
+
+.detailed-plan {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 4px;
+}
+
+.detailed-plan h4 {
+    margin-top: 0;
+    color: #333;
+}
+
+.top-bar .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.top-bar .dropdown-content {
+    display: none;
+    position: absolute;
     background-color: #fff;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.top-bar .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border: none;
+    background-color: #fff;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.top-bar .dropdown-content a:not(:last-child) {
+    border-bottom: 1px solid #eee;
+}
+
+.top-bar .dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.top-bar .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.new-btn {
+    padding: 8px 16px;
+    background-color: #0078d4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.new-btn:hover {
+    background-color: #005a9e;
+}
+
+/* Recruitment Request Form Styles */
+#recruitmentRequestForm {
+    background-color: white;
     padding: 20px;
+    border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    border-radius: 5px;
+}
+
+#recruitmentRequestForm .form-group {
+    margin-bottom: 15px;
+}
+
+#recruitmentRequestForm label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#recruitmentRequestForm input[type="text"],
+#recruitmentRequestForm input[type="number"],
+#recruitmentRequestForm select,
+#recruitmentRequestForm textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#recruitmentRequestForm textarea {
+    resize: vertical;
+}
+
+#recruitmentRequestForm .submit-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#recruitmentRequestForm .submit-btn:hover {
+    background-color: #45a049;
+}
+
+.recruitment-form .radio-group {
+    display: flex;
+    align-items: center;
+}
+
+.recruitment-form .radio-group input[type="radio"] {
+    margin-right: 5px;
+}
+
+.recruitment-form .radio-group label {
+    margin-right: 15px;
+}
+
+.recruitment-form select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.hr-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* 其他样式与 .pm-container 和 .sm-container 相同 */
+
+.request-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.request-item:hover {
+    background-color: #f0f0f0;
+}
+
+.request-title {
+    font-weight: bold;
+}
+
+.request-department {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.form-actions {
+    margin-top: 20px;
+}
+
+.approve-btn, .reject-btn {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.approve-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.reject-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.financial-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.financial-form .form-group {
+    margin-bottom: 15px;
+}
+
+.financial-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.financial-form input[type="text"],
+.financial-form input[type="number"],
+.financial-form select,
+.financial-form textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.financial-form textarea {
+    resize: vertical;
+}
+
+.financial-form .submit-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.financial-form .submit-btn:hover {
+    background-color: #45a049;
+}
+
+.form-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.form-item:hover {
+    background-color: #f0f0f0;
+}
+
+.form-number {
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.form-title {
+    font-size: 0.8em;
+    color: #666;
 }

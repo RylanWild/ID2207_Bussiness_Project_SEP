@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     //在网页启动时获取request与meeting的EventID
-    const requestContainer = document.getElementById('requestDropdown'); 
-    const businessMeetingContainer = document.getElementById('businessmeetingDropdown');
+//    const requestContainer = document.getElementById('requestDropdown'); 
+//    const businessMeetingContainer = document.getElementById('businessmeetingDropdown');
 
     // 获取审批阶段为 01 的事件 ID
     fetch('http://127.0.0.1:5000/api/events/senior_customer_request')
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => console.error('Error fetching approval stage 04 events:', error));
 
     const dropdowns = document.querySelectorAll('.dropdown-header');
-    const eventItems = document.querySelectorAll('.event-item');
+//    const eventItems = document.querySelectorAll('.event-item');
 
     dropdowns.forEach(dropdown => {
         dropdown.addEventListener('click', function() {
@@ -42,13 +42,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 this.querySelector('i').classList.remove('fa-caret-down');
                 this.querySelector('i').classList.add('fa-caret-up');
             }
-        });
-    });
-
-    eventItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const recordNumber = this.getAttribute('data-record');
-            displayEventForm(recordNumber);
         });
     });
 
