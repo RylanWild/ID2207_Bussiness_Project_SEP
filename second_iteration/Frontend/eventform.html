@@ -11,8 +11,8 @@
         <h1 class="eventform-title">Request for Event Planning</h1>
         <form class="eventform">
             <div class="form-group">
-                <label for="recordNumber">Record Number:</label>
-                <input type="text" id="recordNumber" name="recordNumber" required>
+                <label for="Title">Title:</label>
+                <input type="text" id="Title" name="Title" required>
             </div>
             <div class="form-group">
                 <label for="clientName">Client Name:</label>
@@ -38,16 +38,16 @@
                 <label for="expectedBudget">Expected Budget:</label>
                 <input type="number" id="expectedBudget" name="expectedBudget" required>
             </div>
-            <div class="form-group">
-                <label>Preferences:</label>
-                <div class="checkbox-group">
-                    <label><input type="checkbox" name="preferences" value="Decoration"> Decoration</label>
-                    <label><input type="checkbox" name="preferences" value="Parties"> Parties</label>
-                    <label><input type="checkbox" name="preferences" value="Photos/Videos"> Photos/Videos</label>
-                    <label><input type="checkbox" name="preferences" value="Meals"> Breakfast/Lunch/Dinner</label>
-                    <label><input type="checkbox" name="preferences" value="Drinks"> Soft/hot drinks</label>
-                </div>
-            </div>
+<div class="form-group">
+    <label>Preferences:</label>
+    <div class="checkbox-group">
+        <label><input type="checkbox" name="preferences" value="decoration"> Decoration</label>
+        <label><input type="checkbox" name="preferences" value="parties"> Parties</label>
+        <label><input type="checkbox" name="preferences" value="photos_videos"> Photos/Videos</label>
+        <label><input type="checkbox" name="preferences" value="foods"> Breakfast/Lunch/Dinner</label>
+        <label><input type="checkbox" name="preferences" value="drinks"> Soft/Hot Drinks</label>
+    </div>
+</div>
             <div class="form-group">
                 <button type="submit" class="submit-btn">Submit</button>
             </div>
