@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="eventform-container">
+        <h1 class="eventform-title">Request for Event Planning</h1>
+        <form class="eventform">
+            <div class="form-group">
+                <label for="Title">Title:</label>
+                <input type="text" id="Title" name="Title" required>
+            </div>
+            <div class="form-group">
+                <label for="clientName">Client Name:</label>
+                <input type="text" id="clientName" name="clientName" required>
+            </div>
+            <div class="form-group">
+                <label for="eventType">Event Type:</label>
+                <input type="text" id="eventType" name="eventType" required>
+            </div>
+            <div class="form-group">
+                <label for="fromDate">From Date:</label>
+                <input type="date" id="fromDate" name="fromDate" required>
+            </div>
+            <div class="form-group">
+                <label for="toDate">To Date:</label>
+                <input type="date" id="toDate" name="toDate" required>
+            </div>
+            <div class="form-group">
+                <label for="expectedNumAttendees">Expected Number of Attendees:</label>
+                <input type="number" id="expectedNumAttendees" name="expectedNumAttendees" required>
+            </div>
+            <div class="form-group">
+                <label for="expectedBudget">Expected Budget:</label>
+                <input type="number" id="expectedBudget" name="expectedBudget" required>
+            </div>
+<div class="form-group">
+    <label>Preferences:</label>
+    <div class="checkbox-group">
+        <label><input type="checkbox" name="preferences" value="decoration"> Decoration</label>
+        <label><input type="checkbox" name="preferences" value="parties"> Parties</label>
+        <label><input type="checkbox" name="preferences" value="photos_videos"> Photos/Videos</label>
+        <label><input type="checkbox" name="preferences" value="foods"> Breakfast/Lunch/Dinner</label>
+        <label><input type="checkbox" name="preferences" value="drinks"> Soft/Hot Drinks</label>
+    </div>
+</div>
+            <div class="form-group">
+                <button type="submit" class="submit-btn">Submit</button>
+            </div>
+        </form>
+    </div>
+    <script src="eventform.js"></script>
+</body>
+</html>

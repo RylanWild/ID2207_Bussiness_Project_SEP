@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Production Manager</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="pm-container">
+        <div class="top-bar">
+            <div class="dropdown">
+                <button class="new-btn">+ New</button>
+                <div class="dropdown-content">
+                    <a href="#" id="clientRequestForm">Client Request Form</a>
+                    <a href="#" id="recruitmentRequestForm">Recruitment Request Form</a>
+                    <a href="#" id="financialRequestForm">Financial Request Form</a>
+                </div>
+            </div>
+        </div>
+        <div class="main-area">
+            <div class="sidebar">
+                <div class="dropdown">
+                    <div class="dropdown-header">
+                        <i class="fas fa-caret-down"></i>
+                        <span>Inbox</span>
+                    </div>
+                    <div class="dropdown-content">
+                        <div class="event-item" data-record="001">
+                            <div class="record-number">Record #001</div>
+                            <div class="event-type">Wedding</div>
+                        </div>
+                        <div class="event-item" data-record="002">
+                            <div class="record-number">Record #002</div>
+                            <div class="event-type">Corporate Meeting</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <div class="dropdown-header">
+                        <i class="fas fa-caret-down"></i>
+                        <span>Sent</span>
+                    </div>
+                    <div class="dropdown-content">
+                        <div class="event-item" data-record="003">
+                            <div class="record-number">Record #003</div>
+                            <div class="event-type">Birthday Party</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-content">
+                <div id="eventFormDisplay" class="event-form-display"></div>
+            </div>
+        </div>
+    </div>
+    <script src="productionmanager.js"></script>
+</body>
+</html>
