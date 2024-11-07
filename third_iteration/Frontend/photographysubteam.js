@@ -1,8 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const dropdowns = document.querySelectorAll('.dropdown-header');
-    const taskItems = document.querySelectorAll('.task-item');
-    const taskDisplay = document.getElementById('taskDisplay');
+    // 获取下拉容器
+    const unreviewedContainer = document.getElementById('unreviewed');
 
+    // 获取计划审核事件 (stage 为 07)
+    fetch('http://127.0.0.1:5000/api/events/subteam_request')
+    .then(response => response.json())
+    .then(data => {
+        const planReviewUnreviewed = data.approval_stage_06_event_ids.filter(event => event.status === "11");
+        populateDropdown(planReviewUnreviewed, unreviewedContainer, 'Task Assignment');
+    })
+    .catch(error => console.error('Error fetching plan review events:', error));
+    
+    const dropdowns = document.querySelectorAll('.dropdown-header');
+    //点击下拉菜单操作
     dropdowns.forEach(dropdown => {
         dropdown.addEventListener('click', function() {
             this.classList.toggle('active');
@@ -19,62 +29,101 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    taskItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const recordNumber = this.getAttribute('data-record');
-            displayTaskDetails(recordNumber);
-        });
-    });
+    // 填充下拉菜单
+    function populateDropdown(eventDataList, container, label) {
+        eventDataList.forEach(event => {
+            // 检查是否已经存在相同的元素
+            if (!container.querySelector(`[data-record='${event.id}']`)) {
+                const eventItem = document.createElement('div');
+                eventItem.className = 'event-item';
+                eventItem.dataset.record = event.id;
 
-    function displayTaskDetails(recordNumber) {
-        const tasks = {
-            '001': {
-                title: 'Wedding Photoshoot',
-                client: 'John & Sarah Smith',
-                date: '2023-08-15',
-                description: 'Full day wedding photography coverage',
-                status: 'Pending'
-            },
-            '002': {
-                title: 'Corporate Event Coverage',
-                client: 'Tech Innovations Inc.',
-                date: '2023-09-10',
-                description: 'Half day corporate event photography',
-                status: 'Pending'
-            },
-            '003': {
-                title: 'Birthday Party Photos',
-                client: 'Emily Johnson',
-                date: '2023-07-20',
-                description: 'Evening birthday party photography',
-                status: 'Completed'
+                // 根据标签设置显示格式
+                eventItem.innerHTML = `<div class="record-number">${label} #${event.id}</div>`;
+
+                // 添加点击事件监听器，传递 event.id
+                eventItem.addEventListener('click', function() {
+                    fetchEventDetails(event.id); // 确保传递的是 event.id
+                });
+                container.appendChild(eventItem);
             }
+        });    
+        };
+});
+
+//获取事件信息
+function fetchEventDetails(eventId) {
+    fetch(`http://127.0.0.1:5000/api/events/${eventId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            displayEventForm(data);
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            eventFormDisplay.innerHTML = '<p>Failed to load event details. Please try again later.</p>';
+        });
+}
+
+function displayEventForm(eventData) {
+    const eventFormDisplay = document.getElementById('eventFormDisplay');
+
+    if (eventData) {
+        // 定义键名称映射，转换为显示格式
+        const preferencesMapping = {
+            decoration: "Decoration",
+            parties: "Parties",
+            photos_videos: "Photos/Videos",
+            foods: "Foods",
+            drinks: "Drinks"
         };
 
-        const task = tasks[recordNumber];
-        if (task) {
-            let taskHtml = `
-                <h3>${task.title}</h3>
-                <p><strong>Client:</strong> ${task.client}</p>
-                <p><strong>Date:</strong> ${task.date}</p>
-                <p><strong>Description:</strong> ${task.description}</p>
-                <p><strong>Status:</strong> ${task.status}</p>
+        // 定义状态映射
+        const statusMapping = {
+            "00": "Submitted",
+            "01": "Under Review",
+            "10": "Reject",
+            "11": "Approve"
+        };
+
+        // 获取选中的 preferences 并格式化
+        const formattedPreferences = Object.entries(eventData.main_information.preferences || {})
+            .filter(([key, value]) => value) // 仅保留选中的项
+            .map(([key]) => preferencesMapping[key] || key) // 转换名称
+            .join(', ') || 'None';
+
+        // 根据状态码获取状态字符串
+        const statusText = statusMapping[eventData.status] || "Unknown";
+
+        // 填充事件详情
+        eventFormDisplay.innerHTML = `
+            <h3>Title: ${eventData.title} - Request #${eventData.id}</h3>
+            <p><strong>Client Name:</strong> ${eventData.main_information.client_name}</p>
+            <p><strong>Event Type:</strong> ${eventData.main_information.event_type}</p>
+            <p><strong>From Date:</strong> ${eventData.main_information.from_date.year}-${eventData.main_information.from_date.month}-${eventData.main_information.from_date.day}</p>
+            <p><strong>To Date:</strong> ${eventData.main_information.to_date.year}-${eventData.main_information.to_date.month}-${eventData.main_information.to_date.day}</p>
+            <p><strong>Expected Number of Attendees:</strong> ${eventData.main_information.expected_attendees}</p>
+            <p><strong>Expected Budget:</strong> $${eventData.main_information.expected_budget}</p>
+            <p><strong>Preferences:</strong> ${formattedPreferences}</p>
+            <p><strong>Status:</strong> ${statusText}</p>
+        `;
+
+        //分配任务的详情
+        eventFormDisplay.innerHTML += `
+            <div class="detailed-plan">
+                <h4>Description For Photography Team:</h4>
+                <p>${eventData.tasks_assignment.description}</p>
+                <p><strong>Budget:</strong> ${eventData.tasks_assignment.budget}</p>
+                </div>
             `;
 
-            if (task.status === 'Pending') {
-                taskHtml += `
-                    <button class="action-btn" onclick="showDetailedPlanForm('${recordNumber}')">Receive</button>
-                `;
-            }
-
-            taskDisplay.innerHTML = taskHtml;
-        } else {
-            taskDisplay.innerHTML = '<p>Task not found.</p>';
-        }
-    }
-
-    window.showDetailedPlanForm = function(recordNumber) {
-        const formHtml = `
+        //显示填充任务细节
+        eventFormDisplay.innerHTML += `
+            <h3></h3>
             <h3>Detailed Plan</h3>
             <textarea id="detailedPlan" rows="4" cols="50" placeholder="Enter your detailed plan here..."></textarea>
             <div>
@@ -94,32 +143,69 @@ document.addEventListener('DOMContentLoaded', function() {
                     <textarea id="reason" rows="3" cols="50"></textarea>
                 </div>
             </div>
-            <button onclick="submitDetailedPlan('${recordNumber}')">Submit</button>
         `;
-        taskDisplay.innerHTML += formHtml;
-    }
 
-    window.toggleAmountReason = function(show) {
-        const container = document.getElementById('amountReasonContainer');
-        container.style.display = show ? 'block' : 'none';
-    }
+        //显示Respond按钮
+        eventFormDisplay.innerHTML += `
+            <div class="form-actions">
+                <button class="assignment-done-btn" id="respondbtn">Respond Task</button>
+            </div>
+        `;
 
-    window.submitDetailedPlan = function(recordNumber) {
-        const detailedPlan = document.getElementById('detailedPlan').value;
-        const needMoney = document.querySelector('input[name="needMoney"]:checked').value;
-        let amount = '';
-        let reason = '';
-        if (needMoney === 'yes') {
-            amount = document.getElementById('amount').value;
-            reason = document.getElementById('reason').value;
-        }
-        console.log(`Detailed plan for task ${recordNumber} submitted. Need more money: ${needMoney}`);
-        console.log(`Plan: ${detailedPlan}`);
-        if (needMoney === 'yes') {
-            console.log(`Amount: ${amount}`);
-            console.log(`Reason: ${reason}`);
-        }
-        alert('Detailed plan submitted successfully!');
-        // Here you would typically send this data to a server
+        // 添加表单提交事件监听器
+        const respondbtn = document.getElementById('respondbtn');
+            respondbtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // 这里可以添加表单提交的逻辑
+            const needMoreMoney = document.querySelector('input[name="needMoney"]:checked').value === 'yes';
+            const detailedPlan = document.getElementById('detailedPlan').value;
+            const amount = document.getElementById("amount").value;
+            const Reason = document.getElementById("reason").value;
+        
+            // 检查是否有必要的字段
+            if (!detailedPlan || !needMoneyYes) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            // 创建要发送到后端的数据对象
+            const requestData = {
+                detail_plan: detailedPlan,
+                need_more_money: needMoreMoney,
+                amount: amount,
+                reason: Reason
+            };
+
+            // 发送 POST 请求到后端
+            fetch(`http://127.0.0.1:5000/api/events/${eventData.id}/response_task`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert(`Task successfully response for Event ID: ${data.event_id}`);
+                console.log('Server response:', data);
+            })
+            .catch(error => {
+                console.error('There was an error submitting the form:', error);
+                alert('Failed to assign task. Please try again later.');
+            });
+            })
+    } 
+    else {
+        eventFormDisplay.innerHTML = '<p>Event form not found.</p>';
     }
-});
+}
+
+window.toggleAmountReason = function(show) {
+    const container = document.getElementById('amountReasonContainer');
+    container.style.display = show ? 'block' : 'none';
+}

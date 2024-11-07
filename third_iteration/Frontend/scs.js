@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     //在网页启动时获取request与meeting的EventID
-    const requestContainer = document.getElementById('requestDropdown'); 
-    const businessMeetingContainer = document.getElementById('businessmeetingDropdown');
+//    const requestContainer = document.getElementById('requestDropdown'); 
+//    const businessMeetingContainer = document.getElementById('businessmeetingDropdown');
 
     // 获取审批阶段为 01 的事件 ID
     fetch('http://127.0.0.1:5000/api/events/senior_customer_request')
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => console.error('Error fetching approval stage 04 events:', error));
 
     const dropdowns = document.querySelectorAll('.dropdown-header');
-    const eventItems = document.querySelectorAll('.event-item');
+//    const eventItems = document.querySelectorAll('.event-item');
 
     dropdowns.forEach(dropdown => {
         dropdown.addEventListener('click', function() {
@@ -45,34 +45,34 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    eventItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const recordNumber = this.getAttribute('data-record');
-            displayEventForm(recordNumber);
+    const profilePicture = document.querySelector('.profile-picture');
+    const infoPopup = document.querySelector('.info-popup');
+
+    if (profilePicture && infoPopup) {
+        console.log('Profile picture and info popup elements found.');
+
+        profilePicture.addEventListener('click', function(event) {
+            event.stopPropagation(); // 防止事件冒泡
+            console.log('Profile picture clicked.');
+
+            // 切换 infoPopup 的显示状态
+            if (infoPopup.style.display === 'block') {
+                infoPopup.style.display = 'none';
+            } else {
+                infoPopup.style.display = 'block';
+            }
         });
-    });
 
-    function updateUserInfo(email) {
-        const avatar = document.querySelector('.avatar');
-        const welcomeText = document.querySelector('.welcome-text');
-
-        if (email === 'janet@sep.se') {
-            avatar.style.backgroundImage = "url('imgs/portrait/janet.png')"; // 确保路径和文件名正确
-            welcomeText.textContent = 'Welcome, Janet'; // 更新欢迎文字
-        }
+        // 可选：点击页面其他地方时隐藏 infoPopup
+        document.addEventListener('click', function(event) {
+            if (!profilePicture.contains(event.target)) {
+                infoPopup.style.display = 'none';
+            }
+        });
+    } else {
+        console.error('Profile picture or info popup element not found.');
     }
 
-    // 示例：假设在登录成功后调用此函数
-    function onLoginSuccess(email) {
-        updateUserInfo(email);
-    }
-
-    // 假设这是登录表单提交后的处理逻辑
-    document.querySelector('#login-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const email = document.querySelector('#email-input').value;
-        onLoginSuccess(email);
-    });
 });
 
 //自动补全下拉菜单

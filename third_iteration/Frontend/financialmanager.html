@@ -9,36 +9,37 @@
 </head>
 <body>
     <div class="top-bar">
-        <div class="avatar"></div>
-        <div class="welcome-text">Welcome, User</div>
+        <div class="profile-container">
+            <div class="profile-picture">
+                <img src="imgs/portrait/alice.png" alt="Profile Picture">
+            </div>
+            <div class="welcome-text">Welcome, Alice!</div>
+        </div>
     </div>
-    <div class="financialmanager-container">
-        <h2 class="financialmanager-title">Financial Manager Dashboard</h2>
-        <div class="fm-container">
-            <div class="sidebar">
-                <div class="dropdown">
-                    <div class="dropdown-header">
-                        <i class="fas fa-caret-down"></i>
-                        <span>Unreviewed</span>
-                    </div>
-                    <div class="dropdown-content" id="unreviewedDropdown">
-                        <!-- 由js文件自动生成下拉选项部分内容 -->
-                    </div>
+    <div class="fm-container">
+        <div class="sidebar">
+            <div class="dropdown">
+                <div class="dropdown-header">
+                    <i class="fas fa-caret-down"></i>
+                    <span>Unreviewed</span>
                 </div>
-                <div class="dropdown">
-                    <div class="dropdown-header">
-                        <i class="fas fa-caret-down"></i>
-                        <span>Rejected Request</span>
-                    </div>
-                    <div class="dropdown-content" id="rejectrequestDropdown">
-                        <!-- 由js文件自动生成下拉选项部分内容 -->
-                    </div>
+                <div class="dropdown-content" id="unreviewedDropdown">
+                    <!-- 由js文件自动生成下拉选项部分内容 -->
                 </div>
             </div>
-            <div class="main-content">
-                <h2 class="content-header">Choose a form to review</h2>
-                <div id="formDisplay" class="form-display"></div>
+            <div class="dropdown">
+                <div class="dropdown-header">
+                    <i class="fas fa-caret-down"></i>
+                    <span>Rejected Request</span>
+                </div>
+                <div class="dropdown-content" id="rejectrequestDropdown">
+                    <!-- 由js文件自动生成下拉选项部分内容 -->
+                </div>
             </div>
+        </div>
+        <div class="main-content">
+            <h2 class="content-header">Choose a form to review</h2>
+            <div id="formDisplay" class="form-display"></div>
         </div>
     </div>
     <script src="financialmanager.js"></script>

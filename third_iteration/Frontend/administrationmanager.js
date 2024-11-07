@@ -1,14 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
     // 获取未审核和已审核的事件容器
-    const unreviewedContainer = document.querySelector('.dropdown-content:nth-of-type(1)'); 
-    const reviewedContainer = document.querySelector('.dropdown-content:nth-of-type(2)');
+    const unreviewedContainer = document.getElementById('requestDropdown'); 
+    const reviewedContainer = document.getElementById('rejectedRequestDropdown');
+    const businessContainer = document.getElementById('businessMeetingDropdown');
 
     // 获取审批阶段为 03 的事件 ID
     fetch('http://127.0.0.1:5000/api/events/administration_manager_request')
         .then(response => response.json())
         .then(data => {
             // 分别过滤不同 status 的事件
-            const pendingRequests = data.approval_stage_03_event_ids.filter(event => event.status === "00");
+            const pendingRequests = data.approval_stage_03_event_ids.filter(event => event.status === "01");
             const rejectedRequests = data.approval_stage_03_event_ids.filter(event => event.status === "10");
 
             // 填充到不同的下拉菜单中
@@ -22,11 +23,10 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             const businessmeeting = data.approval_stage_04_event_ids;
-            populateDropdown(businessmeeting, reviewedContainer, 'Business Meeting');
+            populateDropdown(businessmeeting, businessContainer, 'Business Meeting');
         })
         .catch(error => console.error('Error fetching approval stage 04 events:', error));
 
-    // 确保选择器匹配 HTML 结构
     const dropdowns = document.querySelectorAll('.dropdown-header');
 
     dropdowns.forEach(dropdown => {
@@ -43,30 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 this.querySelector('i').classList.add('fa-caret-up');
             }
         });
-    });
-
-    updateUserInfo('mike@sep.se');
-
-    function updateUserInfo(email) {
-        const avatar = document.querySelector('.avatar');
-        const welcomeText = document.querySelector('.welcome-text');
-
-        if (email === 'mike@sep.se') {
-            avatar.style.backgroundImage = "url('imgs/portrait/mike.png')"; // 确保路径和文件名正确
-            welcomeText.textContent = 'Welcome, Mike'; // 更新欢迎文字
-        }
-    }
-
-    // 示例：假设在登录成功后调用此函数
-    function onLoginSuccess(email) {
-        updateUserInfo(email);
-    }
-
-    // 假设这是登录表单提交后的处理逻辑
-    document.querySelector('#login-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const email = document.querySelector('#email-input').value;
-        onLoginSuccess(email);
     });
 });
 
@@ -165,7 +141,7 @@ function displayEventForm(eventData) {
         `;
 
         // 如果状态不是 "10" (Reject)，则显示操作按钮
-        if (eventData.status !== "10") {
+        if (eventData.status !== "10" && eventData.approval_stage !== "04") {
             eventFormDisplay.innerHTML += `
                 <div class="form-actions">
                     <button class="approve-btn">Approve</button>

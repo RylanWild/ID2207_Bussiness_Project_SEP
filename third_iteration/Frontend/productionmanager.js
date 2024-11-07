@@ -246,9 +246,12 @@ document.addEventListener('DOMContentLoaded', function() {
             <h3>New Client Request Form - Production Department</h3>
             <form id="newClientRequestForm">
                 <div class="form-group">
-                    <label for="recordNumber">Record Number:</label>
-                    <input type="text" id="recordNumber" name="recordNumber" required>
-                </div>
+                    <label for="EventID">EventID:</label>
+                    <input type="text" id="EventID" name="EventID" required> 
+                </div>  
+                <div class="form-group">
+                    <button type="FindEvent" id="FindEvent" class="FindEventBtn">Find Event</button>
+                </div>         
                 <div class="form-group">
                     <label for="clientName">Client Name:</label>
                     <input type="text" id="clientName" name="clientName" required>
@@ -274,7 +277,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <input type="number" id="expectedBudget" name="expectedBudget" required>
                 </div>
                 <div class="form-group">
-                    <label for="description">Description:</label>
+                    <label for="description">Financial Feedback:</label>
                     <textarea id="description" name="description" rows="4" required></textarea>
                 </div>
                 <div class="department-budget-container">
@@ -282,52 +285,94 @@ document.addEventListener('DOMContentLoaded', function() {
                         <label for="photography">Photography:</label>
                         <textarea id="photography" name="photography" rows="3"></textarea>
                         <div class="budget-input">
-                            <label for="photographyBudget">Budget:</label>
-                            <input type="number" id="photographyBudget" name="photographyBudget">
+                            <label>Budget:</label>
+                            <input type="number">
+                            <label>Person:</label>
+                            <select>
+                                <option value="">Select Person</option>
+                                <option value="Tobias">Tobias</option>
+                                <option value="Magdalena">Magdalena</option>
+                            </select>
                         </div>
                     </div>
-                </div>
-                <div class="department-budget-container">
-                    <div class="department-budget">
-                        <label for="music">Music:</label>
-                        <textarea id="music" name="music" rows="3"></textarea>
-                        <div class="budget-input">
-                            <label for="musicBudget">Budget:</label>
-                            <input type="number" id="musicBudget" name="musicBudget">
-                        </div>
-                    </div>
-                </div>
-                <div class="department-budget-container">
-                    <div class="department-budget">
-                        <label for="graphicDesign">Graphic Design:</label>
-                        <textarea id="graphicDesign" name="graphicDesign" rows="3"></textarea>
-                        <div class="budget-input">
-                            <label for="graphicDesignBudget">Budget:</label>
-                            <input type="number" id="graphicDesignBudget" name="graphicDesignBudget">
-                        </div>
-                    </div>
-                </div>
-                <div class="department-budget-container">
                     <div class="department-budget">
                         <label for="decoration">Decoration:</label>
                         <textarea id="decoration" name="decoration" rows="3"></textarea>
                         <div class="budget-input">
-                            <label for="decorationBudget">Budget:</label>
-                            <input type="number" id="decorationBudget" name="decorationBudget">
+                            <label>Budget:</label>
+                            <input type="number">
+                            <label>Person:</label>
+                            <select>
+                                <option value="">Select Person</option>
+                                <option value="Magy">Magy</option>
+                                <option value="Angelina">Angelina</option>
+                                <option value="Don">Don</option>
+                                <option value="Tom">Tom</option>
+
+                            </select>
                         </div>
                     </div>
-                </div>
-                <div class="department-budget-container">
                     <div class="department-budget">
-                        <label for="networkSupport">Network Support:</label>
-                        <textarea id="networkSupport" name="networkSupport" rows="3"></textarea>
+                        <label for="foodDrinks">Food/Drinks:</label>
+                        <textarea id="foodDrinks" name="foodDrinks" rows="3"></textarea>
                         <div class="budget-input">
-                            <label for="networkSupportBudget">Budget:</label>
-                            <input type="number" id="networkSupportBudget" name="networkSupportBudget">
+                            <label>Budget:</label>
+                            <input type="number">
+                            <label>Person:</label>
+                            <select>
+                                <option value="">Select Person</option>
+                                <option value="Helen">Helen</option>
+                                <option value="Kate">Kate</option>
+                                <option value="Lauren">Lauren</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="department-budget">
+                        <label for="music">Music:</label>
+                        <textarea id="music" name="music" rows="3"></textarea>
+                        <div class="budget-input">
+                            <label>Budget:</label>
+                            <input type="number">
+                            <label>Person:</label>
+                            <select>
+                                <option value="">Select Person</option>
+                                <option value="Antony">Antony</option>
+                                <option value="Adam">Adam</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="department-budget">
+                        <label for="poster">Poster:</label>
+                        <textarea id="poster" name="poster" rows="3"></textarea>
+                        <div class="budget-input">
+                            <label>Budget:</label>
+                            <input type="number">
+                            <label>Person:</label>
+                            <select>
+                                <option value="">Select Person</option>
+                                <option value="Julia">Julia</option>
+                                <option value="Raymond">Raymond</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="department-budget">
+                        <label for="computerIssues">Computer Issues:</label>
+                        <textarea id="computerIssues" name="computerIssues" rows="3"></textarea>
+                        <div class="budget-input">
+                            <label>Budget:</label>
+                            <input type="number">
+                            <label>Person:</label>
+                            <select>
+                                <option value="">Select Person</option>
+                                <option value="Christian">Christian</option>
+                                <option value="Nicolas">Nicolas</option>
+                                <option value="Michael">Michael</option>
+                                <option value="Robert">Robert</option>
+                            </select>
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="submit-btn">Send</button>
+                <button type="submit" id="submitbtn" class="submit-btn">Send</button>
             </form>
         `;
 
@@ -387,4 +432,46 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Financial Request Form submitted successfully!');
         });
     }
+
+    // 获取日历图标和模态框元素
+    const calendarIcon = document.querySelector('.calendar-icon');
+    const modal = document.getElementById('calendar-modal');
+    const closeBtn = document.querySelector('.close');
+
+    // 初始化日历
+    let calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
+        initialView: 'dayGridMonth',
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        events: [
+            // 这里可以添加事件数据
+            {
+                title: 'Meeting',
+                start: '2024-01-15',
+                end: '2024-01-17'
+            }
+            // 更多事件...
+        ]
+    });
+
+    // 点击日历图标显示模态框
+    calendarIcon.addEventListener('click', function() {
+        modal.style.display = "block";
+        calendar.render(); // 重新渲染日历以确保正确显示
+    });
+
+    // 点击关闭按钮关闭模态框
+    closeBtn.addEventListener('click', function() {
+        modal.style.display = "none";
+    });
+
+    // 点击模态框外部关闭模态框
+    window.addEventListener('click', function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    });
 });
