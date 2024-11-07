@@ -312,21 +312,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             </select>
                         </div>
                     </div>
-                    <div class="department-budget">
-                        <label for="foodDrinks">Food/Drinks:</label>
-                        <textarea id="foodDrinks" name="foodDrinks" rows="3"></textarea>
-                        <div class="budget-input">
-                            <label>Budget:</label>
-                            <input type="number">
-                            <label>Person:</label>
-                            <select>
-                                <option value="">Select Person</option>
-                                <option value="Helen">Helen</option>
-                                <option value="Kate">Kate</option>
-                                <option value="Lauren">Lauren</option>
-                            </select>
-                        </div>
-                    </div>
+                   
                     <div class="department-budget">
                         <label for="music">Music:</label>
                         <textarea id="music" name="music" rows="3"></textarea>
