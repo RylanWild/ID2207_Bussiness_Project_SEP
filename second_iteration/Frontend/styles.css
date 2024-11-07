@@ -144,7 +144,16 @@ nav button {
     margin-bottom: 30px;
     font-weight: bold;
 }
-
+.assignment-done-btn{
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    background-color: #4CAF50;
+    color: white;
+}
 .signup-form {
     display: flex;
     flex-direction: column;
@@ -182,6 +191,14 @@ nav button {
     margin-top: 10px;
 }
 
+.approve-btn, .reject-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
 .continue-btn:hover {
     background-color: #45a049;
 }
@@ -430,17 +447,6 @@ nav button {
 /* 在文件末尾添加以下样式 */
 .form-actions {
     margin-top: 20px;
-}
-
-.assignment-done-btn{
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-right: 10px;
-    background-color: #4CAF50;
-    color: white;
 }
 
 .approve-btn, .reject-btn {
@@ -694,6 +700,20 @@ nav button {
     font-size: 16px;
 }
 
+#newClientRequestForm .FindEventBtn:hover {
+    background-color: #45a049;
+}
+
+#newClientRequestForm .FindEventBtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
 #newClientRequestForm .submit-btn:hover {
     background-color: #45a049;
 }
@@ -892,12 +912,12 @@ nav button {
 
 .top-bar .dropdown-content a {
     color: black;
-    padding: 12px 16px;
+    padding: 12px 20px;
     text-decoration: none;
     display: block;
     border: none;
     background-color: #fff;
-    width: 100%;
+    width: 82%;
     text-align: left;
     cursor: pointer;
     font-size: 14px;

@@ -138,20 +138,9 @@ function displayEventForm(eventData) {
                 })
                 .catch(error => console.error('Error submitting feedback:', error));
             });
-    } else if (eventData.approval_stage === "08") {
-        formDisplay.innerHTML = `
-            <h3>Financial Request #${eventData.id}</h3>
-            <p><strong>Department:</strong> ${eventData.department}</p>
-            <p><strong>Required Amount:</strong> $${eventData.required_amount}</p>
-            <p><strong>Reason:</strong> ${eventData.reason}</p>
-            <p><strong>Status:</strong> ${statusText}</p>
-            ${eventData.status === "11" ? `
-                <button class="approve-btn" onclick="approveEvent(${eventData.id})">Approve</button>
-                <button class="reject-btn" onclick="rejectEvent(${eventData.id})">Reject</button>
-            ` : ''}
-        `;
+        }
     }
-
+    
     document.addEventListener('DOMContentLoaded', function() {
         // 获取 Write Feedback 按钮和反馈容器
         const writeFeedbackBtn = document.querySelector('.write-feedback-btn');
@@ -164,6 +153,97 @@ function displayEventForm(eventData) {
             feedbackContainer.style.display = 'block';
         });
     });
+
+
+    if (eventData.approval_stage === "08") {
+        // 定义键名称映射，转换为显示格式
+        const preferencesMapping = {
+            decoration: "Decoration",
+            parties: "Parties",
+            photos_videos: "Photos/Videos",
+            foods: "Foods",
+            drinks: "Drinks"
+        };
+
+        // 定义状态映射
+        const statusMapping = {
+            "00": "Submitted",
+            "01": "Under Review",
+            "10": "Reject",
+            "11": "Approve"
+        };
+
+        // 获取选中的 preferences 并格式化
+        const formattedPreferences = Object.entries(eventData.main_information.preferences || {})
+            .filter(([key, value]) => value) // 仅保留选中的项
+            .map(([key]) => preferencesMapping[key] || key) // 转换名称
+            .join(', ') || 'None';
+
+        // 根据状态码获取状态字符串
+        const statusText = statusMapping[eventData.status] || "Unknown";
+        
+        // 填充事件详情
+        formDisplay.innerHTML = `
+            <h3>Title: ${eventData.title} - Request #${eventData.id}</h3>
+            <p><strong>Client Name:</strong> ${eventData.main_information.client_name}</p>
+            <p><strong>Event Type:</strong> ${eventData.main_information.event_type}</p>
+            <p><strong>From Date:</strong> ${eventData.main_information.from_date.year}-${eventData.main_information.from_date.month}-${eventData.main_information.from_date.day}</p>
+            <p><strong>To Date:</strong> ${eventData.main_information.to_date.year}-${eventData.main_information.to_date.month}-${eventData.main_information.to_date.day}</p>
+            <p><strong>Expected Number of Attendees:</strong> ${eventData.main_information.expected_attendees}</p>
+            <p><strong>Expected Budget:</strong> $${eventData.main_information.expected_budget}</p>
+            <p><strong>Preferences:</strong> ${formattedPreferences}</p>
+            <p><strong>Status:</strong> ${statusText}</p>
+        `;
+
+        //分配任务的详情
+        if (eventData.tasks_assignment) {
+            formDisplay.innerHTML += `
+                <div class="detailed-plan">
+                    <h4>Description For Photography Team:</h4>
+                    <p>${eventData.tasks_assignment.description}</p>
+                    <p><strong>Budget:</strong> ${eventData.tasks_assignment.budget}</p>
+                `;
+
+            if (eventData.tasks_assignment.detail_plan != "unavailable" && eventData.tasks_assignment.detail_plan != "N/A") { //当有数据时才显示
+                formDisplay.innerHTML += `                               
+                <div class="detailed-plan">
+                    <h4>Detailed Plan from Photography Team:</h4>
+                    <p>${eventData.tasks_assignment.detail_plan}</p>
+                    <p><strong>Needs More Money:</strong> ${eventData.tasks_assignment.need_more_money ? 'Yes' : 'No'}</p>
+                `;
+            if (eventData.tasks_assignment.need_more_money) { //需要加预算时才显示
+                formDisplay.innerHTML += `
+                <div class="detailed-plan">
+                    <p><strong>Additional Amount Requested:</strong> $${eventData.tasks_assignment.amount}</p>
+                    <p><strong>Reason:</strong> ${eventData.tasks_assignment.reason}</p>
+                `;
+            }
+            }
+            formDisplay.innerHTML += `</div>`;
+        }
+
+            if (eventData.status !== "10" && eventData.approval_stage !== "09") {
+            // 如果状态不是 "10" (Reject)，显示默认操作按钮
+            formDisplay.innerHTML += `
+                <div class="form-actions">
+                    <button class="approve-btn">Approve</button>
+                    <button class="reject-btn">Reject</button>
+                </div>
+            `;
+            const approveBtn = formDisplay.querySelector('.approve-btn');
+            const rejectBtn = formDisplay.querySelector('.reject-btn');
+
+            if (approveBtn) {
+                approveBtn.addEventListener('click', () => approveEvent(eventData.id));
+            }
+            if (rejectBtn) {
+                rejectBtn.addEventListener('click', () => rejectEvent(eventData.id));
+            }
+        }
+    }
+    
+
+
 }
 
 
@@ -180,7 +260,7 @@ function mapStatus(status) {
 }
 
 function approveEvent(eventId) {
-    fetch(`http://127.0.0.1:5000/api/events/${eventId}/approve`, { method: 'PUT' })
+    fetch(`http://127.0.0.1:5000/api/events/${eventId}/financial_approve_task`, { method: 'PUT' })
         .then(response => response.json())
         .then(data => {
             alert("Event approved successfully!");
@@ -197,5 +277,4 @@ function rejectEvent(eventId) {
             fetchEventDetails(eventId);
         })
         .catch(error => console.error('Error rejecting event:', error));
-}
 }
