@@ -126,11 +126,12 @@ def get_event_details(event_id):
         "tasks_assignment": {
             "task_id": tasks_assignment.id if tasks_assignment else None,
             "title": tasks_assignment.title if tasks_assignment else "N/A",
-            "due_date": {
-                "year": tasks_assignment.due_date_year if tasks_assignment else None,
-                "month": tasks_assignment.due_date_month if tasks_assignment else None,
-                "day": tasks_assignment.due_date_day if tasks_assignment else None
-            },
+            "budget": tasks_assignment.budget if tasks_assignment else None,
+#            "due_date": {
+#                "year": tasks_assignment.due_date_year if tasks_assignment else None,
+#                "month": tasks_assignment.due_date_month if tasks_assignment else None,
+#                "day": tasks_assignment.due_date_day if tasks_assignment else None
+#            },
             "assignee": tasks_assignment.assignee if tasks_assignment else "N/A",
             "department": tasks_assignment.department if tasks_assignment else "N/A",
             "description": tasks_assignment.description if tasks_assignment else "N/A",
@@ -299,18 +300,15 @@ def assign_task(event_id):
     title = data.get('title')
     assignee = data.get('assignee')
     department = data.get('department')
+    #只用到了这两个
     budget = data.get('budget')
     description = data.get('description')
-
-    # 检查是否所有必需字段都存在
-    if not title or not assignee or not department or budget is None or not description:
-        return jsonify({'error': 'All fields are required'}), 400
 
     # 查找对应的 Event 对象
     event = Event.query.get(event_id)
     if event is None:
         return jsonify({'error': 'Event not found'}), 404
-    event.approval_stage = '06'  # 05-06 Production Manager(Assign Task) - Subteam (Respond Task)
+    event.approval_stage = '05'  # 手动更新状态 不在提交表格时更新 05-06 Production Manager(Assign Task) - Subteam (Respond Task) 
 
     # 查找或创建 TasksAssignment 对象
     if event.tasks_assignment:
@@ -405,7 +403,7 @@ def approve_task(event_id):
         return jsonify({'error': 'Event or TaskAssignment not found'}), 404
     
     # 根据 need_more_money 值更新 approval_stage
-    if event.task_assignment.need_more_money:
+    if event.tasks_assignment.need_more_money:
         event.approval_stage = "08"  # 如果需要更多资金，设置为 08
     else:
         event.approval_stage = "09"  # 如果不需要更多资金，设置为 09    
@@ -420,7 +418,22 @@ def approve_task(event_id):
         'task_status': event.tasks_assignment.status
     }), 200
 
+@app.route('/api/events/<int:event_id>/financial_approve_task', methods=['PUT'])
+def financial_approve_task(event_id):
+    # 查找指定 Event 的 Task Assignment
+    event = Event.query.get(event_id)
+    if not event or not event.tasks_assignment:
+        return jsonify({'error': 'Event or TaskAssignment not found'}), 404
 
+    event.approval_stage = "09"  # 事件批准，设置为完成状态 09
+
+    db.session.commit()
+
+    return jsonify({
+        'message': f'Task for event {event_id} approved successfully',
+        'event_id': event_id,
+        'task_status': event.tasks_assignment.status
+    }), 200
 
 @app.route('/api/events/<int:event_id>/reject_task', methods=['PUT'])
 def reject_task(event_id):
@@ -522,6 +535,20 @@ def get_ProductionManagerRequest():
         'approval_stage_05_event_ids': event_ids
     }), 200
 
+# 请求查找06 Subteam需要处理的Request
+@app.route('/api/events/subteam_request', methods=['GET'])
+def get_SubteamRequest():
+    # 查询所有 approval_stage 为 "06" 的事件
+    events = Event.query.with_entities(Event.id, Event.status).filter_by(approval_stage="06").all()
+
+    # 提取事件 ID 列表
+    event_ids = [{"id": event.id, "status": event.status} for event in events]
+
+    return jsonify({
+        'approval_stage_06_event_ids': event_ids
+    }), 200
+
+
 # 请求查找07 Production Manager需要处理的Plan Review
 @app.route('/api/events/plan_review', methods=['GET'])
 def get_PlanReview():
@@ -560,9 +587,6 @@ def get_DoneRequest():
     return jsonify({
         'approval_stage_09_event_ids': event_ids
     }), 200
-
-@app.route('/api/events/<int:event_id>/review_plan', methods=['PUT'])
-
 
 @app.route('/')
 def home():
